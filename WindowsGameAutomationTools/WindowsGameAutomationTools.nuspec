@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>WindowsGameAutomationTools</id>
+    <version>1.0.0</version>
+    <authors>Peter Beckfield</authors>
+    <description>A collection of tools to assist automating playing games on Windows.  Screen Scraping, Image Detection, Input Simulation, File/Folder Manipulation, Guassian Blurring, etc.  Currently built on .NET 4.7.2 as it's very Windows-specific.</description>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using static WindowsGameAutomationTools.WindowsFilenameSorting;
 
 // from command line: nuget pack
-// from package manager console: dotnet nuget push C:\Users\peter\Documents\WindowsGameAutomationTools\WindowsGameAutomationTools\BitmapCollection.1.0.1.nupkg --source https://api.nuget.org/v3/index.json --api-key
+// from package manager console: dotnet nuget push C:\Users\peter\Documents\WindowsGameAutomationTools\WindowsGameAutomationTools\WindowsGameAutomationTools.1.0.0.nupkg --source https://api.nuget.org/v3/index.json --api-key
 
 // Started from http://www.developerfusion.com/code/4630/capture-a-screen-shot/ with heavy modifications done
 namespace WindowsGameAutomationTools

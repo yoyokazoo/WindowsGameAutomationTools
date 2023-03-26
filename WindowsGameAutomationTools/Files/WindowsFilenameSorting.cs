@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace WindowsGameAutomationTools
+namespace WindowsGameAutomationTools.Files
 {
     internal class WindowsFilenameSorting
     {

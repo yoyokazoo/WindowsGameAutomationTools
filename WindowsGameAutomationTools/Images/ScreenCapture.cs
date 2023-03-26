@@ -8,13 +8,13 @@ using System.Threading;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using static WindowsGameAutomationTools.WindowsFilenameSorting;
+using static WindowsGameAutomationTools.Files.WindowsFilenameSorting;
 
 // from command line: nuget pack
 // from package manager console: dotnet nuget push C:\Users\peter\Documents\WindowsGameAutomationTools\WindowsGameAutomationTools\WindowsGameAutomationTools.1.0.0.nupkg --source https://api.nuget.org/v3/index.json --api-key
 
 // Started from http://www.developerfusion.com/code/4630/capture-a-screen-shot/ with heavy modifications done
-namespace WindowsGameAutomationTools
+namespace WindowsGameAutomationTools.Images
 {
     // TODO: Split the regions into different classes?
     // Top level functionality goes somewhere, helpers exist separately, etc.

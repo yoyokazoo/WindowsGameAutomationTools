@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Drawing;
 
-namespace WindowsGameAutomationTools.Images
+namespace WindowsGameAutomationTools.ImageDetection
 {
     public static class ColorComparison
     {
-        private static bool ColorsExactlyMatch(Color firstColor, Color secondColor)
+        public static bool ColorsExactlyMatch(Color firstColor, Color secondColor)
         {
             if (firstColor.R == secondColor.R &&
                 firstColor.G == secondColor.G &&
@@ -17,7 +17,7 @@ namespace WindowsGameAutomationTools.Images
             return false;
         }
 
-        private static bool ColorsAlmostMatch(Color firstColor, Color secondColor, int threshold = 20)
+        public static bool ColorsAlmostMatch(Color firstColor, Color secondColor, int threshold = 20)
         {
             int r = Math.Abs(firstColor.R - secondColor.R);
             int g = Math.Abs(firstColor.G - secondColor.G);

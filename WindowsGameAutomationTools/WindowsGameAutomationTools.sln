@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGameAutomationTools", "WindowsGameAutomationTools.csproj", "{A09B341F-B409-4FB6-8B45-154CB7DAE91B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsGameAutomationToolsTests", "..\WindowsGameAutomationToolsTests\WindowsGameAutomationToolsTests.csproj", "{70F34C87-082A-416A-811C-646B5D050F1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A09B341F-B409-4FB6-8B45-154CB7DAE91B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A09B341F-B409-4FB6-8B45-154CB7DAE91B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A09B341F-B409-4FB6-8B45-154CB7DAE91B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F34C87-082A-416A-811C-646B5D050F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F34C87-082A-416A-811C-646B5D050F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F34C87-082A-416A-811C-646B5D050F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F34C87-082A-416A-811C-646B5D050F1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

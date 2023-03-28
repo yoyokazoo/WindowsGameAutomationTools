@@ -98,12 +98,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileLogger.cs" />
+    <Compile Include="Logging\FileLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScreenCapture.cs" />
-    <Compile Include="SerializationHelper.cs" />
-    <Compile Include="SlackHelper.cs" />
-    <Compile Include="WindowsFilenameSorting.cs" />
+    <Compile Include="Images\ScreenCapture.cs" />
+    <Compile Include="Files\SerializationHelper.cs" />
+    <Compile Include="Slack\SlackHelper.cs" />
+    <Compile Include="Files\WindowsFilenameSorting.cs" />
+    <Compile Include="Slack\SlackProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

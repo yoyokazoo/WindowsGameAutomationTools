@@ -8,6 +8,9 @@ using SlackAPI;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using WindowsGameAutomationTools.Logging;
+using System.Text.Json;
+using WindowsGameAutomationTools.Files;
 
 namespace WindowsGameAutomationTools.Slack
 {
@@ -20,9 +23,7 @@ namespace WindowsGameAutomationTools.Slack
             {
                 if (_client == null)
                 {
-                    //ContestEntryProfile profile = SerializationHelper.DeserializeFromJSON<ContestEntryProfile>(ContestEntryProfile.DEFAULT_PROFILE_FILENAME);
-                    //OauthToken = profile.SlackOauthToken;
-
+                    (ChannelId, OauthToken) = LoadSlackProfile();
                     _client = new SlackClient(OauthToken);
                 }
                 return _client;
@@ -35,16 +36,15 @@ namespace WindowsGameAutomationTools.Slack
         }
 
         // TODO: Some way to store this other than plaintext
-        private const string OauthTokenFilename = "SlackHelperOauthToken.txt";
+        private static string ChannelId { get; set; }
         private static string OauthToken { get; set; }
 
-        public static void SendMessageToChannel(string message, string channelId, Action<PostMessageResponse> callback = null, string thread_ts = null)
+        public static void SendMessageToChannel(string message, Action<PostMessageResponse> callback = null, string thread_ts = null)
         {
-            Client.PostMessage(callback, channelId, message, thread_ts: thread_ts);
+            Client.PostMessage(callback, ChannelId, message, thread_ts: thread_ts);
         }
 
         public static void SendScreenshotToChannel(
-            string channelId,
             string fileExtension = null,
             string fileName = null,
             string fileTitle = null,
@@ -71,7 +71,7 @@ namespace WindowsGameAutomationTools.Slack
                     (asdf) => { Console.WriteLine(asdf.error); },
                     bitmapAsBytes,
                     fileName,
-                    new string[] { channelId },
+                    new string[] { ChannelId },
                     fileTitle,
                     fileComment,
                     useAsync: false,
@@ -81,7 +81,6 @@ namespace WindowsGameAutomationTools.Slack
         }
 
         public static void SendStringAsFileToChannel(
-            string channelId,
             string stringToBeFile,
             string fileExtension = null,
             string fileName = null,
@@ -100,7 +99,7 @@ namespace WindowsGameAutomationTools.Slack
                 (result) => { /*Console.WriteLine(result.error);*/ },
                 stringAsBytes,
                 fileName,
-                new string[] { channelId },
+                new string[] { ChannelId },
                 fileTitle,
                 fileComment,
                 useAsync: false,
@@ -109,7 +108,6 @@ namespace WindowsGameAutomationTools.Slack
         }
 
         public static void SendLoggerAsFileToChannel(
-            string channelId,
             FileLogger logger,
             string fileTitle = null,
             string fileComment = null,
@@ -124,7 +122,7 @@ namespace WindowsGameAutomationTools.Slack
                 (result) => { /*Console.WriteLine(result.error);*/ },
                 fileAsBytes,
                 logger.LoggerFileName,
-                new string[] { channelId },
+                new string[] { ChannelId },
                 fileTitle,
                 fileComment,
                 useAsync: false,
@@ -132,16 +130,36 @@ namespace WindowsGameAutomationTools.Slack
                 thread_ts);
         }
 
-        #region OAuthToken
+        #region OauthToken
 
-        public static string LoadOauthTokenFromFile()
+        public static (string, string) LoadSlackProfile()
         {
-            return null;
+            try
+            {
+                var profile = SerializationHelper.DeserializeFromJSON<SlackProfile>(SlackProfile.DEFAULT_FILENAME);
+
+                if (SlackProfile.DEFAULT_CHANNEL_ID.Equals(profile.ChannelId))
+                {
+                    throw new Exception($"Default ChannelId found in SlackProfile.  Add ChannelId otherwise SlackHelper won't function.");
+                }
+
+                if (SlackProfile.DEFAULT_OAUTH_TOKEN.Equals(profile.OauthToken))
+                {
+                    throw new Exception($"Default OauthToken found in SlackProfile.  Add OauthToken otherwise SlackHelper won't function.");
+                }
+
+                return (profile.ChannelId, profile.OauthToken);
+            }
+            catch(FileNotFoundException fnfe)
+            {
+                CreateEmptySlackProfile();
+                throw new FileNotFoundException($"File not found {fnfe.Message}  Created empty profile, fill in with Oauth token before running again.");
+            }
         }
 
-        public static void CreateOauthTokenFile()
+        public static void CreateEmptySlackProfile()
         {
-
+            SerializationHelper.SerializeToJSON(SlackProfile.DEFAULT_FILENAME, new SlackProfile());
         }
 
         #endregion

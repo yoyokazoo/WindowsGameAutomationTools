@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using static WindowsGameAutomationTools.Files.WindowsFilenameSorting;
 
 // from command line: nuget pack
-// from package manager console: dotnet nuget push C:\Users\peter\Documents\WindowsGameAutomationTools\WindowsGameAutomationTools\WindowsGameAutomationTools.1.0.0.nupkg --source https://api.nuget.org/v3/index.json --api-key
+// from package manager console: dotnet nuget push C:\Users\peter\Documents\WindowsGameAutomationTools\WindowsGameAutomationTools\WindowsGameAutomationTools.1.0.1.nupkg --source https://api.nuget.org/v3/index.json --api-key
 
 // Started from http://www.developerfusion.com/code/4630/capture-a-screen-shot/ with heavy modifications done
 namespace WindowsGameAutomationTools.Images
@@ -77,102 +77,6 @@ namespace WindowsGameAutomationTools.Images
             [DllImport("user32.dll")]
             public static extern bool SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int left, int top, int width, int height, int wFlags);
 
-        }
-
-        #endregion
-
-        #region Color Matching (deprecated?)
-
-        private static Color findAverageColor(Point corner, int GEM_WIDTH, int GEM_HEIGHT, Bitmap bm)
-        {
-            int rSum = 0;
-            int gSum = 0;
-            int bSum = 0;
-            int numColors = 36; // precalced for speed, needs to change if the bounds change
-
-            int lowerBoundX = (GEM_WIDTH / 2) - 3;
-            int upperBoundX = (GEM_WIDTH / 2) + 3;
-
-            int lowerBoundY = (GEM_HEIGHT / 2) - 3;
-            int upperBoundY = (GEM_HEIGHT / 2) + 3;
-
-            for (int x = lowerBoundX; x < upperBoundX; x++)
-            {
-                for (int y = lowerBoundY; y < upperBoundY; y++)
-                {
-                    Color pixel = bm.GetPixel(corner.X + x, corner.Y + y);
-                    rSum += pixel.R;
-                    gSum += pixel.G;
-                    bSum += pixel.B;
-                }
-            }
-            return Color.FromArgb(rSum / numColors, gSum / numColors, bSum / numColors);
-        }
-
-        private static Color[] findKeyColorPoints(Point corner, int GEM_WIDTH, int GEM_HEIGHT, Bitmap bm)
-        {
-            Color[] colors = new Color[9];
-
-            int[] xCoords = { (GEM_WIDTH / 2) - 3, (GEM_WIDTH / 2), (GEM_WIDTH / 2) + 3 };
-            int[] yCoords = { (GEM_HEIGHT / 2) - 3, (GEM_HEIGHT / 2), (GEM_HEIGHT / 2) + 3 };
-
-            for (int x = 0; x < 3; x++)
-            {
-                for (int y = 0; y < 3; y++)
-                {
-                    Color pixel = bm.GetPixel(corner.X + xCoords[x], corner.Y + yCoords[y]);
-                    colors[x * 3 + y] = pixel;
-                }
-            }
-            return colors;
-        }
-
-        // defaults are set to king.com width and height
-        private static Rectangle findTopCornerRectFromRoundedCorner(Bitmap pic, Color outerColor, Color cornerColor, int gameWidth = 775, int gameHeight = 600)
-        {
-            // we look 1 pixel behind, hence starting at 1
-            for (int x = 1; x < pic.Width - 15; x++)
-            {
-                for (int y = 1; y < pic.Height - 15; y++)
-                {
-                    if (colorsAlmostMatch(pic.GetPixel(x - 1, y - 1), outerColor) &&
-                        colorsAlmostMatch(pic.GetPixel(x - 1, y + 15), outerColor) &&
-                        colorsAlmostMatch(pic.GetPixel(x + 15, y - 1), outerColor) &&
-                        colorsAlmostMatch(pic.GetPixel(x, y + 15), cornerColor, 35) &&
-                        colorsAlmostMatch(pic.GetPixel(x + 15, y), cornerColor, 35))
-                    {
-                        return new Rectangle(x, y, gameWidth, gameHeight);
-                    }
-                }
-            }
-
-            return new Rectangle(-1, -1, -1, -1);
-        }
-
-        private static bool colorsExactlyMatch(Color firstColor, Color secondColor)
-        {
-            if (firstColor.R == secondColor.R &&
-                firstColor.G == secondColor.G &&
-                firstColor.B == secondColor.B)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private static bool colorsAlmostMatch(Color firstColor, Color secondColor, int threshold = 20)
-        {
-            int r = Math.Abs(firstColor.R - secondColor.R);
-            int g = Math.Abs(firstColor.G - secondColor.G);
-            int b = Math.Abs(firstColor.B - secondColor.B);
-
-            if (r > threshold || g > threshold || b > threshold)
-            {
-                return false;
-            }
-
-            return true;
         }
 
         #endregion

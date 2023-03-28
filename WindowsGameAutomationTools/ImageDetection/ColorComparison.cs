@@ -5,6 +5,8 @@ namespace WindowsGameAutomationTools.ImageDetection
 {
     public static class ColorComparison
     {
+        public const int DEFAULT_THRESHOLD = 20;
+
         public static bool ColorsExactlyMatch(Color firstColor, Color secondColor)
         {
             if (firstColor.R == secondColor.R &&
@@ -17,7 +19,7 @@ namespace WindowsGameAutomationTools.ImageDetection
             return false;
         }
 
-        public static bool ColorsAlmostMatch(Color firstColor, Color secondColor, int threshold = 20)
+        public static bool ColorsAlmostMatch(Color firstColor, Color secondColor, int threshold = DEFAULT_THRESHOLD)
         {
             int r = Math.Abs(firstColor.R - secondColor.R);
             int g = Math.Abs(firstColor.G - secondColor.G);

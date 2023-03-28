@@ -6,8 +6,6 @@ namespace WindowsGameAutomationTools.ImageDetection
     // TODO: Add summary comments
     public class ImageMatchMultiOffsetMultiColorPositions
     {
-        private const int DEFAULT_THRESHOLD = 20;
-
         // Offset to the top left of the image to check
         public List<Point> OffsetPoints { get; set; }
 
@@ -21,7 +19,11 @@ namespace WindowsGameAutomationTools.ImageDetection
 
         public int Threshold { get; set; }
 
-        public ImageMatchMultiOffsetMultiColorPositions(List<Point> offsetPoints, List<Point> colorPoints, List<List<Color>> colorsToCheckAgainst, int threshold = DEFAULT_THRESHOLD)
+        public ImageMatchMultiOffsetMultiColorPositions(
+            List<Point> offsetPoints,
+            List<Point> colorPoints,
+            List<List<Color>> colorsToCheckAgainst,
+            int threshold = ColorComparison.DEFAULT_THRESHOLD)
         {
             OffsetPoints = offsetPoints;
             ColorPoints = colorPoints;

@@ -57,5 +57,11 @@ namespace WindowsGameAutomationToolsTests
 
             SlackHelper.SendMessageToChannel("Message");
         }
+
+        [TestMethod]
+        public void CreateEmptySlackProfileTest()
+        {
+            SlackHelper.CreateEmptySlackProfile();
+        }
     }
 }

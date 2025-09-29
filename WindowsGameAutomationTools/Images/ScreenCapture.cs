@@ -10,10 +10,6 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using static WindowsGameAutomationTools.Files.WindowsFilenameSorting;
 
-// Update .nuspec file with new version
-// From command line: nuget pack -p Configuration="Release"
-// From package manager console: dotnet nuget push C:\Users\peter\Documents\WindowsGameAutomationTools\WindowsGameAutomationTools\WindowsGameAutomationTools.1.0.1.nupkg --source https://api.nuget.org/v3/index.json --api-key
-
 // Started from http://www.developerfusion.com/code/4630/capture-a-screen-shot/ with heavy modifications done
 namespace WindowsGameAutomationTools.Images
 {
